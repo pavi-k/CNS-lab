@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            body {
+				
+				
+				font-family:Sans-serif;
+				
+			}
+            #header {
+				position: relative;
+				width: 100%;
+				height: 150px; 
+				overflow: hidden; 
+				background-color: beige;
+			}
+
+            .centered {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				text-align: center;
+			}
+            .myform * {
+				box-sizing: border-box;
+			}
+            .myform label {
+				
+				font-weight: bold;
+				text-align: right;
+				display: block;
+			}
+            .myForm input {
+				margin-left: 2em;
+				float: right;
+				width: 20em;
+				border: 1px solid #ccc;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				font-size: 0.9em;
+				padding: 0.3em;
+			}
+        </style>
+
+        <script>
+            function gcd (a, b)
+			{
+			var r;
+			while (b>0)
+			{
+				r=a%b;
+				a=b;
+				b=r;
+			}
+			return a;
+			}
+            function power(a, b)
+			{
+			var temp=1, i;
+			for(i=1;i<=b;i++)
+				temp*=a;
+			return temp;
+			}
+            function showdsa(){
+				var q=parseInt(document.mform.q.value);
+				var a=parseInt(document.mform.a.value);
+                var xa=parseInt(document.mform.xa.value);
+                var m=parseInt(document.mform.m.value)
+                var ya=power(a,xa) % q;
+                //window.alert(parseInt(ya));
+                var i,K,kin;
+                for (i=2;i<q;i++){
+                    if(gcd(q-1,i)==1){
+                        K=i;
+                        break;
+                    }
+                }
+
+                
+                var s1=power(a,K) % q;
+
+                
+
+                for (i=1;i<q-1;i++){
+                    if(((i*K) % (q-1)) == 1){
+                        kin=i;
+                        break;
+                    }
+                }
+
+                var s2=kin*(m-(xa*s1)) % (q-1)
+                var v1,v2;
+                v1=(a*m)%q;
+                v2=(power(ya,s1)*power(s1,s2))%q
+                //window.alert("Valid signature : v1= "+parseInt(v1)+"v2 = "+parseInt(v2));
+                if(v1==v2){
+                    window.alert("Valid signature : v1= "+parseInt(v1)+"v2 = "+parseInt(v2));
+                }
+
+                else{
+                    window.alert("Invalid signature");
+                }
+				
+
+
+
+				
+			}
+
+        </script>
+    </head>
+
+    
+    <body>
+        <header id="header" >
+			<p style="position: relative; left:650px; top:50px; font-size: 30px; font-family: Georgia;
+			color:goldenrod;">DSA ALGORITHM</p>
+        </header>
+        
+        <div class="centered">
+            <form class ="myform" name="mform">
+                <label>Q:<input type="text" name="q"></label><br>
+                <label>A(PRIMITIVE ROOT):<input type="text" name="a"></label><br>
+                <label>XA:<input type="text" name="xa"></label><br>
+                <label>MESSAGE:<input type="text" name="m"></label><br>
+                
+                <button onclick="showdsa()">encrypt</button>
+            </form>
+        </div>
+    </body>
+
+</html>
