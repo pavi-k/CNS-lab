@@ -41,3 +41,15 @@ System.out.println("Computed public key : "+y);
 	keygen();
 	}
 }
+
+
+ALGO
+
+Pick two large primes numbers p and q.
+Calculate n as n = pq and Φ(n) as Φ(n)=(p-1)(q-1).
+Choose a relatively small integer d such that GCD(d,Φ(n))=1
+Find e, the multiplicative inverse of d mod Φ(n)
+(d,n) is the public key and (e,n) is the private key.
+To encrypt M, compute Encrypt(M) = M*e (mod n) .
+To decrypt C, compute Decrypt(C) = Cd (mod n).
+
