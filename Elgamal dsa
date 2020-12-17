@@ -1,0 +1,70 @@
+ALGO
+
+Choose a large prime p and a primitive root α.
+Input the private key Xa such 1 < Xa < q-1.
+Compute public key Ya as yA = a xA mod q.
+Input the hash message m= H(M), 0 <= m <= (q-1).
+Choose a random integer K with 1 <= K <= (q-1) and gcd(K,q-1)=1 .
+Compute temporary key: S1 = a k mod q and compute K-1 the inverse of K mod (q-1).
+Compute the value: S2 = K-1(m-xAS1) mod (q-1) and the signature is:(S1,S2).
+Compute V1 as V1 = a*m mod q and V2 as V2 = (yA^ S1)* (S1^S2) mod q .
+Signature is valid if V1 = V2 else invalid.
+
+
+import java.util.*; 
+import java.lang.*; 
+import java.math.*; 
+public class elgdigsig
+{
+public static BigInteger power(BigInteger a,int b,BigInteger p)
+{
+if(b==1)
+return a;
+else
+return (a.pow(b)).mod(p);
+}
+public static void main(String[] args)
+{
+Scanner scan=new Scanner(System.in); 
+BigInteger q,a,ya,s1,s2,x,v1,v2;
+int m,k,xa;
+System.out.println("Enter prime number q"); 
+q=scan.nextBigInteger(); 
+System.out.println("Enter primitive root"); 
+a=scan.nextBigInteger(); 
+System.out.println("Enter Xa"); 
+xa=scan.nextInt();
+ya=power(a,xa,q); 
+System.out.println("Enter K"); 
+k=scan.nextInt(); 
+System.out.println("Enter message"); 
+m=scan.nextInt();
+System.out.println("Public Key (ya) : "+ya); 
+s1=power(a,k,q);
+System.out.println("S1 : "+s1); 
+int i=1;
+while(true)
+{
+x=BigInteger.valueOf((k*i)%(q.intValue()-1)); 
+if(x.intValue()==1)
+break;
+else
+i=i+1;
+}
+BigInteger check;
+Long l=new Long(1L);
+check=BigInteger.valueOf(l);
+
+s2=(BigInteger.valueOf(i).multiply(BigInteger.valueOf(m).subtract(BigInteger.valueOf(xa).mult iply(s1)))).mod(q.subtract(check));
+System.out.println("S2 : "+s2); 
+System.out.println("Signature (S1,S2) : ("+s1+","+s2+")" ); 
+v1=power(a,m,q);
+v2=(ya.pow(s1.intValue()).multiply(s1.pow(s2.intValue()))).mod(q); 
+System.out.println("V1 : "+v1+" V2 : "+v2); 
+System.out.println("Verification");
+if(v1.compareTo(v2)==0) System.out.println("Signature is Valid");
+else
+System.out.println("Signature is invalid");
+
+}
+}
