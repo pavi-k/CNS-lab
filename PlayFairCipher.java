@@ -279,3 +279,14 @@ class PlayFairCipher{
        }
        }
 }
+
+ALGORITHM
+
+To encrypt a message, one would break the message into diagrams (groups of 2 letters) For example, "HelloWorld" becomes "HE LL OW OR LD".
+These diagrams will be substituted using the key table.
+Since encryption requires pairs of letters, messages with an odd number of characters usually append an uncommon letter, such as "X", to complete the final diagram.
+The two letters of the diagram are considered opposite corners of a rectangle in the key table. To perform the substitution, apply the following 4 rules, in order, to each pair of letters in the plaintext:
+If a pair is a repeated letter, insert filler like 'X’.
+If both letters fall in the same row, replace each with the letter to its right (circularly).
+If both letters fall in the same column, replace each with the letter below it (circularly).
+Otherwise, each letter is replaced by the letter in the same row but in the column of the other letter of the pair.
