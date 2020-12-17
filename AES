@@ -1,0 +1,13 @@
+ALGO
+Read the 128-bit plain text.
+Add the round Key.
+The 16 input bytes are substituted by looking up a fixed table (S-box) given in design. The result is in a matrix of four rows and four columns.
+Each of the four rows of the matrix is shifted to the left. Any entries that ‘fall off’ are re-inserted on the right side of the row.
+The result is a new matrix consisting of the same 16 bytes but shifted with respect to each other.
+Each column of four bytes is now transformed using a special mathematical
+function. This function takes as input the four bytes of one column and outputs four completely new bytes, which replace the original column. The result is another new matrix consisting of 16 new bytes. It should be noted that this step is not performed in the last round.
+Repeat the same process for all the rounds.
+The final round should be done in a similar way without mix columns.
+Decryption is done in reverse way to encryption.
+
+
