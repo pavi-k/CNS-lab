@@ -1,0 +1,128 @@
+The message is written out in rows of a fixed length, and then read out again column by column, and the columns are chosen in some scrambled order.
+Width of the rows and the permutation of the columns are usually defined by a keyword.
+For example, the word HACK is of length 4 (so the rows are of length 4), and the permutation is defined by the alphabetical order of the letters in the keyword. In this case, the order would be “3 1 2 4”.
+Any spare spaces are filled with nulls or left blank or placed by a character (Example: _).
+Finally, the message is read off in columns, in the order specified by the keyword.
+To decipher it, the recipient has to work out the column lengths by dividing the message length by the key length.
+Then, write the message out in columns again, then reorder the columns by reforming the key word.
+
+
+PROGRAM
+
+import java.util.*;
+class transposition{
+ public static void main(String args[])
+ {              
+                int choice;
+ 
+                String plainText,cipherText,decryptedText;
+               do{
+             Scanner scn=new Scanner(System.in);
+            System.out.println("Enter choice 1)encrypt 2)Decrypt 3)exit");
+          choice=scn.nextInt();
+          switch(choice)
+          {
+            case 1:
+            {
+              encryption();
+              break;
+            }
+            case 2:
+            {
+              decryption();
+              break;
+            }
+          }
+        }while(choice!=3);
+      }
+      static void encryption()
+      {
+        String plainText;
+        int row,col,i,j;
+        Scanner scan=new Scanner(System.in);
+        System.out.println("Enter plain text:");
+        plainText=scan.nextLine();
+        char[] stringToCharArray = plainText. toCharArray();
+        System.out.println("Enter row and col");
+        row=scan.nextInt();
+        col=scan.nextInt();
+        int arr[]=new int[col];
+        System.out.println("Enter keys");
+        for(i=0;i<col;i++)
+        {
+          arr[i]=scan.nextInt();
+        }
+        char mat[][]=new char[row][col];
+        String encryp="";
+        int k=0;
+        int val=82;
+        for(i=0;i<row;i++)
+        {
+          for(j=0;j<col;j++)
+          {
+              if(k>=plainText.length())
+              {
+                mat[i][j]=(char)val;
+                val=val+1;
+              }
+              else
+              {
+                mat[i][j]=stringToCharArray[k];
+                k=k+1;
+              }
+          }
+        }
+        for(i=0;i<col;i++)
+        {
+          for(j=0;j<row;j++)
+          {
+            if(mat[j][arr[i]]!='0')
+                  encryp+=mat[j][arr[i]];
+          }
+        }
+        System.out.println(encryp);
+      }
+       static void decryption()
+      {
+        String cipherText;
+        Scanner scan=new Scanner(System.in);
+        System.out.println("Enter cipherText");
+        cipherText=scan.nextLine();
+        int row,col;
+        char[] stringToCharArray = cipherText. toCharArray();
+        System.out.println("Enter row and col");
+        row=scan.nextInt();
+        col=scan.nextInt();
+        int arr[]=new int[col];
+        int i;
+        System.out.println("Enter keys");
+        for(i=0;i<col;i++)
+        {
+          arr[i]=scan.nextInt();
+        }
+        int k=0,j;
+         char mat[][]=new char[row][col];
+        for(i=0;i<col;i++)
+        {
+          for(j=0;j<row;j++)
+          {
+            if(k<cipherText.length())
+            {
+                mat[j][arr[i]]=stringToCharArray[k];
+                k=k+1;
+            }
+            
+          }
+        }
+        String decrypt="";
+        for(i=0;i<row;i++)
+        {
+          for(j=0;j<col;j++)
+          {
+            if(Character.isLowerCase(mat[i][j]))
+                decrypt+=mat[i][j];
+          }
+        }
+System.out.println(decrypt);
+      }
+    }
