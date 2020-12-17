@@ -1,0 +1,80 @@
+Input a prime number q.
+Input a large prime p with 2^L-1 < p < 2^L,where L= 512 to 1024 bits & is a multiple of 64.
+Input the primitive root choose g such that g = h^((p-1)/q).
+Input the private key X and compute public key Y as Y = (g*x) mod p.
+Input a random integer k ,such k<q.
+Input the hash value m of the message (H(M))..
+Compute r as r = (g*k mod p)mod q and s as s = [k-1*(H(M)+ xr)] mod q.
+Compute :
+w as w = s-1 mod q ,
+u1 as u1= [H(M)w ]mod q
+u2 as u2= (r*w)mod q
+v as v = [(g^u1* y^u2)mod p ]mod q.
+The signature is valid if v==r else invalid.
+
+import java.util.*; 
+import java.lang.*; 
+import java.math.*; 
+public class dsadigsig
+{
+public static BigInteger power(BigInteger a,int b,BigInteger p){ 
+if(b==1)
+return a;
+else
+return (a.pow(b)).mod(p);
+}
+public static void main(String[] args){ 
+Scanner scan=new Scanner(System.in); 
+BigInteger q,p,g,ya; 
+System.out.println("Enter prime integer q"); 
+q=scan.nextBigInteger(); 
+System.out.println("Enter prime integer p"); 
+p=scan.nextBigInteger(); 
+System.out.println("Enter primitive root g"); 
+g=scan.nextBigInteger();
+int xa; 
+System.out.println("Enter xa "); 
+xa=scan.nextInt(); 
+ya=power(g,xa,p);
+int k;
+BigInteger m;
+System.out.println("Enter k"); 
+k=scan.nextInt(); 
+System.out.println("Enter hash value "); 
+m=scan.nextBigInteger();
+System.out.println("Public Key (ya) : "+ya); 
+BigInteger r,x;
+r=power(g,k,p).mod(q); 
+System.out.println("r: "+ r); 
+int i=1;
+while(true){
+x=(BigInteger.valueOf(k).multiply(BigInteger.valueOf(i))).mod(q); 
+if(x.intValue()==1)
+break;
+else
+i=i+1;
+}
+BigInteger s;
+
+s=(BigInteger.valueOf(i).multiply(m.add(BigInteger.valueOf(xa).multiply(r)))).mod(q); System.out.println("s: "+s);
+System.out.println("Signature (r,s) : ("+r+","+s+")"); 
+i=1;
+while(true){
+x=(s.multiply(BigInteger.valueOf(i))).mod(q); 
+if(x.intValue()==1)
+break;
+else
+i=i+1;
+}
+BigInteger w,u1,u2,v; w=BigInteger.valueOf(i).mod(q); u1=(m.multiply(w)).mod(q);
+u2=(r.multiply(w)).mod(q); 
+v=(((g.pow(u1.intValue())).multiply(ya.pow(u2.intValue()))).mod(p)).mod(q); System.out.println("W :" +w);
+System.out.println("U1 :"+u1); 
+System.out.println("U2 :"+u2); 
+System.out.println("V : "+v); 
+System.out.println("Verification"); 
+if(v.compareTo(r)==0)
+else
+System.out.println("Signature is valid");
+
+}}
