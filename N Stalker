@@ -1,0 +1,18 @@
+Install
+Global Option->change proxy setting
+check both boxes
+press test
+proxy is working properly
+Update Manager-> Upadte all
+click start
+put path- www.google.com
+check scan HTTP box
+choose scan policy->Manual test 
+Next
+Choose Engine tab
+check CGI and Scripts box
+click optimize
+Optimize results->next
+Start Session->start scan
+
+Thus the N-Stalker Vulnerability Assessment tool has been downloaded, installed and the features have been explored by using a website.
