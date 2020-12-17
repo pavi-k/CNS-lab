@@ -304,3 +304,10 @@ class Des_algo{
 	} 
 } 
 // code contributed by Abhay Bhat 
+
+Read the 64-bit plain text.
+Split it into two 32-bit blocks and store it in two different arrays.
+Perform XOR operation between these two arrays.
+The output obtained is stored as the second 32-bit sequence and the original second 32-bit sequence forms the first part.
+Thus the encrypted 64-bit cipher text is obtained in this way. Repeat the same process for the remaining plain text characters.
+
