@@ -1,0 +1,178 @@
+ALGORITHM
+
+In the Hill cipher, each letter is represented by a number modulo 26.
+Divide the input string into blocks of size n and Identify A=0, B=1, C=2, …, Z=25.
+To encrypt a message, each block of n letters is multiplied by an invertible n x n matrix, again modulus 26. i.e.
+C=[P][K] mod 26
+Where C is the cipher text, P is the plain text and K is the key.
+Perform the above step for each block of the plain text.
+To decrypt the message, each block is multiplied by the inverse of the matrix used for encryption i.e. P=[C][K inverse] mod 26.
+
+
+PROGRAM
+import java.util.*; 
+public class HillCipher{
+public static void main(String args[])
+{
+String plainText,cipherText; 
+int block;
+int choice;
+Scanner scn=new Scanner(System.in);
+do{
+System.out.println("Enter choice 1)encrypt 2)Decrypt: 3)exit"); 
+choice=scn.nextInt();
+switch(choice)
+{
+case 1:
+{
+
+Scanner sc=new Scanner(System.in); 
+System.out.println("Enter plain-text:"); 
+plainText=sc.nextLine(); 
+System.out.println("Enter block size of matrix:"); 
+block=sc.nextInt(); 
+System.out.println(encrypt(plainText,block)); 
+break;
+}
+
+case 2:
+{
+System.out.println("Enter cipher text:"); 
+Scanner scan=new Scanner(System.in); 
+cipherText=scan.nextLine();
+System.out.println("Enter block size of matrix:");
+block=scan.nextInt(); 
+System.out.println(Decrypt(cipherText,block)); 
+break;
+}
+}
+}while(choice!=3);
+}
+static int[][] keyInsert(int block)
+{
+int key[][]=new int[block][block]; 
+Scanner scn=new Scanner(System.in); 
+System.out.println("Enter key Matrix"); 
+for(int i=0;i < block;i++){
+for(int j=0;j < block;j++)
+{
+key[i][j]=scn.nextInt();
+}
+}
+return key;
+}
+static int[][] KeyInverseInsert(int block)
+{
+
+Scanner scn=new Scanner(System.in); 
+int key[][]=new int[block][block];
+System.out.println("Enter key Inverse Matrix:");
+for(int i=0;i < block;i++)
+{
+for(int j=0;j < block;j++)
+{
+key[i][j]=scn.nextInt();
+}
+}
+return key;
+}
+static int indexOfChar(char c){
+String allChar="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+for(int i=0;i < allChar.length();i++){
+if(allChar.charAt(i)==c) return i;
+}
+return -1;
+}
+static char charAtIndex(int pos)
+{
+String allChar="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+return allChar.charAt(pos);
+}
+static String encryptBlock(String plain,int block,int key[][])
+{
+plain=plain.toUpperCase();
+String b1="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+int a[][]=new int[block][1],sum=0;
+int cipherMatrix[][]=new int[block][1]; 
+String cipher="";
+for(int i=0;i < block;i++)
+{
+a[i][0]=indexOfChar(plain.charAt(i));
+}
+for(int i=0;i < block;i++)
+{
+for(int j=0;j < 1;j++)
+{
+for(int k=0;k < block;k++)
+{
+sum=sum+key[i][k]*a[k][j];
+}
+cipherMatrix[i][j] = sum%26; 
+sum = 0;
+}
+}
+for(int i=0;i < block;i++){
+cipher+=charAtIndex(cipherMatrix[i][0]);
+}
+return cipher;
+}
+static String encrypt(String plainText,int block)
+{
+String cipherText="";
+int key[][]=new int[block][block]; 
+key=keyInsert(block);
+String b1="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+plainText=plainText.toUpperCase(); 
+int len=plainText.length();
+// System.out.println(plainText.substring(1,2+1)); 
+while(len%block!=0){
+plainText+="X"; 
+System.out.println(len); 
+len=plainText.length();
+}
+for(int i=0;i < len-1;i=i+block)
+{
+cipherText+=encryptBlock(plainText.substring(i,i+block),block,key); 
+cipherText+=" ";
+}
+return cipherText;
+}
+static String decryptBlock(String cipher,int block,int key[][])
+{
+cipher=cipher.toUpperCase();
+int a[][]=new int[block][1],sum=0; 
+int plainMatrix[][]=new int[block][1];
+String plain="";
+for(int i=0;i < block;i++)
+{
+a[i][0]=indexOfChar(cipher.charAt(i));
+}
+for(int i=0;i < block;i++)
+{
+for(int j=0;j < 1;j++)
+{
+for(int k=0;k < block;k++)
+{
+sum=sum+key[i][k]*a[k][j];
+}
+while(sum < 0)
+{
+sum+=26;
+}
+plainMatrix[i][j] = sum%26; 
+sum = 0;
+} 
+}
+for(int i=0;i < block;i++){
+plain+=charAtIndex(plainMatrix[i][0]);} return plain;}
+static String Decrypt(String cipherText,int block){
+String plainText="";
+int key[][]=new int[block][block];
+key=KeyInverseInsert(block); cipherText=cipherText.replaceAll(" ", ""); cipherText=cipherText.toUpperCase();
+int len=cipherText.length(); for(int i=0;i < len-1;i=i+block){
+plainText+=decryptBlock(cipherText.substring(i,i+block),block,key);
+plainText+=" "; 
+} 
+return plainText; 
+}
+}
