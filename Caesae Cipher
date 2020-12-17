@@ -1,0 +1,152 @@
+import java.io.BufferedReader; import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner; public class CeaserCipher {
+public static void main(String[] args) throws IOException
+{
+int choice;
+
+
+do
+{
+System.out.println("Enter the choice(1)Encryption by Shifting\n(2)Decryption by Shifting\n(3)Encryption by Modulos\n(4)Decryption by Modulos\n(5)Exit ");
+Scanner sc=new Scanner(System.in);
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); choice=sc.nextInt();
+switch(choice)
+{
+
+case 1:
+{
+System.out.print("Enter Plain Text: ");
+
+String str = br.readLine(); System.out.print("\nEnter the Key: "); int key = sc.nextInt();
+String encrypted = encrypt(str, key);
+System.out.println("\nEncrypted String by Shifting is: " +encrypted); System.out.println("\n");
+break;
+}
+
+case 2:
+{
+System.out.print("Enter Cipher Text: ");
+
+String str = br.readLine(); System.out.print("\nEnter the Key: "); int key = sc.nextInt();
+String decrypted = decrypt(str, key);
+
+
+
+
+
+
+
+
+}
+case 3:
+{
+System.out.println("\nDecrypted String by Shifting is: "+decrypted); System.out.println("\n");
+break;
+
+
+
+
+
+System.out.print("Enter Plain Text: ");
+
+
+String str = br.readLine(); System.out.print("\nEnter the Key: "); int key = sc.nextInt();
+String encrye=encry(str,key); System.out.println("\nEncrypted String is: "+encrye); System.out.println("\n");
+break;
+
+}
+case 4:
+{
+System.out.print("Enter Cipher Text: "); String str = br.readLine(); System.out.print("\nEnter the Key: "); int key = sc.nextInt();
+String decrye=decry(str,key); System.out.println("\nDecrypted String is: "+decrye); System.out.println("\n");
+break;
+
+}
+
+
+}
+}while(choice!=5);
+}
+public static String decry(String str, int key)
+{
+String decrypted = "";
+for(int i = 0; i < str.length(); i++)
+{
+int c = str.charAt(i);
+if (Character.isUpperCase(c))
+{
+c = (((c-65) - key) % 26)+65;
+if (c < 'A') c = c + 26;
+}
+else if (Character.isLowerCase(c))
+{
+c = (((c-97) - key) % 26)+97;
+if (c < 'a') c = c + 26;
+}
+decrypted += (char) c;
+}
+return decrypted;
+}
+public static String encry(String str,int key)
+
+String encrypted = "";
+for(int i = 0; i < str.length(); i++)
+{
+int c = str.charAt(i);
+//System.out.println((((c-97)+key)%26)+97); if (Character.isUpperCase(c))
+{
+c = (((c-65) + key) % 26)+65;
+if (c > 'Z')
+c = c - 26;
+
+}
+else if (Character.isLowerCase(c))
+{
+c = (((c-97) + key) % 26)+97;
+if (c > 'z')
+c = c - 26;
+
+}
+encrypted += (char) c;
+}
+return encrypted;
+}
+public static String encrypt(String str, int key)
+{
+String encrypted = "";
+for(int i = 0; i < str.length(); i++)
+
+int c = str.charAt(i);
+if (Character.isUpperCase(c))
+{
+c = c + (key % 26); if (c > 'Z')
+c = c - 26;
+
+}
+else if (Character.isLowerCase(c))
+{
+c = c + (key % 26); if (c > 'z')
+c = c - 26;
+
+}
+encrypted += (char) c;
+}
+return encrypted;
+}
+public static String decrypt(String str, int key)
+{
+String decrypted = "";
+for(int i = 0; i < str.length(); i++)
+{
+int c = str.charAt(i);
+if (Character.isUpperCase(c))
+{
+
+
+c = c - (key % 26);
+if (c < 'A') c = c + 26;}
+else if (Character.isLowerCase(c)) { c = c - (key % 26);
+if (c < 'a')
+c = c + 26;}
+decrypted += (char) c;} return decrypted;}}
