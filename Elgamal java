@@ -48,3 +48,22 @@ System.out.println("K inv : "+kb);
 	keygen();
 	}
 }
+ALGO
+
+
+Bob generates public and private key :
+Bob chooses a very large number q and a cyclic group Fq.
+
+
+From the cyclic group Fq, he choose any element g and an element such that gcd(a, q) = 1.
+Then he computes h = ga.
+Bob publishes F, h = ga, q and g as his public key and retains a as private key.
+Alice encrypts data using Bob’s public key :
+Alice selects an element k from cyclic group F
+such that gcd(k, q) = 1.
+Then she computes p = gk  and s = hk  = gak.
+She multiples s with M.
+Then she sends (p, M*s) = (gk, M*s).
+Bob decrypts the message :
+Bob calculates s′ = pa  = gak.
+He divides M*s by s′ to obtain M as s = s′.
