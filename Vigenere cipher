@@ -1,0 +1,117 @@
+import java.io.BufferedReader; 
+import java.io.IOException; 
+import java.io.InputStreamReader; 
+import java.util.Scanner;
+
+public class VigenereCipher {
+public static void main(String[] args) throws IOException
+{
+
+Scanner sc=new Scanner(System.in);
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+int choice;
+do{
+System.out.println("Enter the choice(1)Encrypt\n(2)Decrypt\n3)Exit"); 
+choice=sc.nextInt();
+switch(choice)
+{
+case 1:
+{
+encrypt();
+break;
+}
+case 2:
+{
+decrypt(); break;
+}
+}
+}while(choice!=3);
+}
+public static void encrypt()throws IOException
+{
+
+String abc="";
+int[][] vig=new int[26][26]; 
+for(int i=0;i<26;i++){
+for(int j=0;j<26;j++){
+vig[i][j]=(i+j)%26;
+}
+}
+Scanner sc=new Scanner(System.in);
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+System.out.print("Enter any Plain Text: ");
+String str = br.readLine(); 
+System.out.print("\nEnter the Key: "); 
+String key = br.readLine();
+System.out.println("Resultant Cipher Text:"); 
+for(int i=0,j=0;i<str.length();i++,j++)
+{
+if(j>=key.length())
+{
+j=0;
+}
+
+int c=str.charAt(i); 
+int a=key.charAt(j); 
+if(c>=97 && a>=97)
+abc+=(char)(vig[c-97][a-97]+97);
+
+else if(c>=97)
+abc+=(char)(vig[c-97][a-65]+97); 
+
+else if(a>=97){
+abc+=(char)(vig[c-65][a-97]+65);
+}
+else
+{
+abc+=(char)(vig[c-65][a-65]+65);
+}
+//System.out.println(c+" "+a);
+}
+System.out.println(abc);
+}
+public static void decrypt() throws IOException
+{
+String abc="";
+int[][] vig=new int[26][26]; 
+for(int i=0;i<26;i++){
+for(int j=0;j<26;j++){
+vig[i][j]=(i+j)%26;
+}
+}
+
+Scanner sc=new Scanner(System.in);
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+System.out.print("Enter any Cipher Text: ");
+String str = br.readLine(); 
+System.out.print("\nEnter the Key: "); 
+String key = br.readLine(); 
+System.out.println("Resultant Plain Text:"); 
+for(int i=0,j=0;i<str.length();i++,j++)
+{
+if(j>=key.length()){ 
+j=0;
+}
+int c=str.charAt(i); 
+int a=key.charAt(j); 
+int k=0;
+while(vig[k][a-97]!=c-97){ 
+k++;
+}
+abc+=(char)(k+97);
+}
+System.out.println(abc);
+}
+}
+
+ALGORITHM :
+The Vigenere cipher is a method of encrypting alphabetic text by using a series of different Caesar ciphers based on the letters of a keyword.
+It is a simple form of polyalphabetic substitution.
+Let P=p1p1.. be the plain text ,C=c1c2.. be the cipher text and K=(k1k2…kn,k1k2…kn,..) be the key stream and the key stream is the repetition of initial key stream(as many times as needed).
+The encryption can be performed as,
+Ci=(Pi+Ki) mod 26
+Do the above steps for all the characters in the plain text.
+
+
+The decryption can be performed as,
+Pi=(Ci-Ki+26) mod 26
