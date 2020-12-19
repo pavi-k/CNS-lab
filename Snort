@@ -17,8 +17,11 @@ Opens log files in ASCII while Running IDS mode
 snort -A console -i3 -c c:\Snort\etc\snort.conf -l c:\Snort\log -K ascii
 
 
-ALGORITHM:
+WRITING PART:
+RESULT:
+The demonstration of intrusion detection using the SNORT tool has been done successfully.
 
+ALGORITHM:
 Download SNORT from snort.org. Install snort
 Download Rules.
 Install WinPCAP.
@@ -70,4 +73,11 @@ snort -i 3 -c C:\Snort\etc\snort.conf -A console
 To generate Log files in ASCII mode, you can use following command while running snort in IDS mode:
 
 snort -A console -i3 -c c:\Snort\etc\snort.conf -l c:\Snort\log -K ascii
+
+Aim:
+To demonstrate intrusion detection systems using SNORT.
+
+
+
+
 
