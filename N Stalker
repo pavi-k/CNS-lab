@@ -1,4 +1,5 @@
 Install
+Open application
 Global Option->change proxy setting
 check both boxes
 press test
@@ -10,9 +11,15 @@ check scan HTTP box
 choose scan policy->Manual test 
 Next
 Choose Engine tab
+leave default options
 check CGI and Scripts box
 click optimize
 Optimize results->next
 Start Session->start scan
+
+
+AIM
+To download the N-Stalker Vulnerability Assessment Tool and explore the features.
+
 
 Thus the N-Stalker Vulnerability Assessment tool has been downloaded, installed and the features have been explored by using a website.
