@@ -1,14 +1,23 @@
+WHAT you need to do:
+
+Install snort version-v2.9
+replace the rules folder
+make changes in snort.conf file in C->snort->etc->snort.conf
+save changes
+open cmd
 snort -> bin change directory
-edit snort.conf
-Run Snort -W
-Run Snort -h
+This command opens an interface b/w snort and the machine.
+Run Snort -W 
+
+Starts IDS mode
 Run snort -i 3 -c C:\Snort\etc\snort.conf -A console
 
+Opens log files in ASCII while Running IDS mode 
 
 snort -A console -i3 -c c:\Snort\etc\snort.conf -l c:\Snort\log -K ascii
 
 
-Algorithm
+ALGORITHM:
 
 Download SNORT from snort.org. Install snort
 Download Rules.
@@ -23,9 +32,6 @@ Click the OK button and then close all dialog boxes. Open command prompt and nav
 Type the following commands:
 Snort –W
 This is to find the interface.
-
-
-
 
 Do the following changes in snort.conf file:
 
