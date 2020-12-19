@@ -1,3 +1,4 @@
+ALGORITHM
 gmer.net
 Download exe
 scan option on right bottom
@@ -5,3 +6,22 @@ restart system
 open again 
 scan
 disable or delete unwanted rootkits 
+rootkits are shown in red 
+
+
+AIM:
+To install a rootkit hunter and find the malwares in a computer.
+
+ROOTKIT HUNTER:
+rkhunter (Rootkit Hunter) is a Unix-based tool that scans for rootkits, backdoors and possible local exploits.
+It does this by comparing SHA-1 hashes of important files with known good ones in online databases, searching for default directories (of rootkits), wrong permissions, hidden files, suspicious strings in kernel modules, and special tests for Linux and FreeBSD.
+rkhunter is notable due to its inclusion in popular operating systems (Fedora, Debian, etc.)
+The tool has been written in Bourne shell, to allow for portability. It can run on almost all UNIX-derived systems.
+
+GMER ROOTKIT TOOL:
+GMER is a software tool written by a Polish researcher Przemysław Gmerek, for detecting and removing rootkits.
+It runs on Microsoft Windows and has support for Windows NT, 2000, XP, Vista, 7, 8 and 10. With version 2.0.18327 full support for Windows x64 is added.
+
+RESULT:
+In this experiment a rootkit hunter software tool has been installed and the rootkits have been detected.
+
