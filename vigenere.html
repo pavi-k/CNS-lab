@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+	
+	<title>Vigenère cipher</title>
+	<meta http-equiv="Content-Style-Type" content="text/css"/>
+	<meta http-equiv="Content-Script-Type" content="application/javascript"/>
+	<meta name="viewport" content="width=device-width,initial-scale=1"/>
+	
+	<link rel="canonical" href="D:\vigenere.js"/>
+</head>
+
+<body>
+
+<div class="vert-main">
+<div class="horz-main">
+<article>
+<h1>Vigenère cipher </h1>
+
+<script src="D:\vigenere.js"></script>
+<form action="#" method="get" onsubmit="return false">
+	<table class="noborder">
+		<tbody>
+			<tr>
+				<td><label for="text">Text:</label></td>
+				<td><textarea id="text" cols="50" rows="10" style="width:40em; height:15em">THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG.</textarea></td>
+			</tr>
+			<tr>
+				<td><label for="key">Key:</label></td>
+				<td><input type="text" value="abc" id="key" style="width:10em;"/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="button" value="Encrypt" onclick="doCrypt(false)"/>
+					<input type="button" value="Decrypt" onclick="doCrypt(true)"/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+</body>
+</html>
