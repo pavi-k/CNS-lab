@@ -10,7 +10,7 @@ This command opens an interface b/w snort and the machine.
 Run Snort -W 
 
 Starts IDS mode
-Run snort -i 3 -c C:\Snort\etc\snort.conf -A console
+Run snort -i 1 -c C:\Snort\etc\snort.conf -A console
 
 Opens log files in ASCII while Running IDS mode 
 
