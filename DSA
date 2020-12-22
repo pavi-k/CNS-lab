@@ -55,8 +55,8 @@ else
 i=i+1;
 }
 BigInteger s;
-
-s=(BigInteger.valueOf(i).multiply(m.add(BigInteger.valueOf(xa).multiply(r)))).mod(q); System.out.println("s: "+s);
+s=(BigInteger.valueOf(i).multiply(m.add(BigInteger.valueOf(xa).multiply(r)))).mod(q); 
+System.out.println("s: "+s);
 System.out.println("Signature (r,s) : ("+r+","+s+")"); 
 i=1;
 while(true){
@@ -66,15 +66,19 @@ break;
 else
 i=i+1;
 }
-BigInteger w,u1,u2,v; w=BigInteger.valueOf(i).mod(q); u1=(m.multiply(w)).mod(q);
+BigInteger w,u1,u2,v; 
+w=BigInteger.valueOf(i).mod(q); 
+u1=(m.multiply(w)).mod(q);
 u2=(r.multiply(w)).mod(q); 
-v=(((g.pow(u1.intValue())).multiply(ya.pow(u2.intValue()))).mod(p)).mod(q); System.out.println("W :" +w);
+v=(((g.pow(u1.intValue())).multiply(ya.pow(u2.intValue()))).mod(p)).mod(q); 
+System.out.println("W :" +w);
 System.out.println("U1 :"+u1); 
 System.out.println("U2 :"+u2); 
 System.out.println("V : "+v); 
-System.out.println("Verification"); 
+System.out.println("Verification");
 if(v.compareTo(r)==0)
-else
 System.out.println("Signature is valid");
+else
+System.out.println("Signature is invalid");
 
 }}
