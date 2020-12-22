@@ -55,7 +55,7 @@ BigInteger check;
 Long l=new Long(1L);
 check=BigInteger.valueOf(l);
 
-s2=(BigInteger.valueOf(i).multiply(BigInteger.valueOf(m).subtract(BigInteger.valueOf(xa).mult iply(s1)))).mod(q.subtract(check));
+s2=(BigInteger.valueOf(i).multiply(BigInteger.valueOf(m).subtract(BigInteger.valueOf(xa).multiply(s1)))).mod(q.subtract(check));
 System.out.println("S2 : "+s2); 
 System.out.println("Signature (S1,S2) : ("+s1+","+s2+")" ); 
 v1=power(a,m,q);
